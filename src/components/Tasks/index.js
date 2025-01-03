@@ -4,8 +4,10 @@ import { Container } from "./styles";
 import TasksCounter from "./tasksCounter";
 import TasksBox from "./tasksBox";
 
-import themeLight from '../../assets/lightbulb.svg'
-import themeDark from '../../assets/lightbulb-fill.svg'
+import themeLight from '../../assets/lightbulb.svg';
+import themeDark from '../../assets/lightbulb-fill.svg';
+
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 export default function Tasks({ onToggleTheme, selectedTheme }) {
   const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -76,6 +78,16 @@ export default function Tasks({ onToggleTheme, selectedTheme }) {
     );
   };
 
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const reorderedTasks = Array.from(tasks);
+    const [movedTask] = reorderedTasks.splice(result.source.index, 1);
+    reorderedTasks.splice(result.destination.index, 0, movedTask);
+
+    setTasks(reorderedTasks);
+  }
+
   return (
     <Container>
       <div className="search">
@@ -94,22 +106,48 @@ export default function Tasks({ onToggleTheme, selectedTheme }) {
 
       <TasksCounter tasks={tasks} taskTotal={total} />
 
-      {tasks.map((item) => (
-        <TasksBox
-          key={item.id}
-          onCheck={handleCheck}
-          onRemove={handleRemove}
-          onComplete={handleComplete}
-          onEdit={handleSaveEdit}
-          tasks={{
-            id: item.id,
-            complete: item.complete,
-            check: item.check,
-            text: item.text,
-            delete: item.deleted,
-          }}
-        />
-      ))}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="tasksList">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {tasks.map((item, index) => (
+                <Draggable
+                  key={item.id}
+                  draggableId={item.id.toString()}
+                  index={index} >
+                    
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        ...provided.draggableProps.style,
+                        backgroundColor: 'transparent'
+                      }}
+                    >
+                      <TasksBox
+                        onCheck={handleCheck}
+                        onRemove={handleRemove}
+                        onComplete={handleComplete}
+                        onEdit={handleSaveEdit}
+                        tasks={{
+                          id: item.id,
+                          complete: item.complete,
+                          check: item.check,
+                          text: item.text,
+                          delete: item.deleted,
+                        }}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </Container>
   );
 }
