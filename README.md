@@ -39,8 +39,8 @@ Este é um projeto simples de lista de tarefas (to-do list) desenvolvido em **Re
 
 1. **Clone o repositório**:  
    ```bash
-   git clone https://github.com/PedroHenriqueBS/ToDoList.git
-   cd ToDoList
+   git clone https://github.com/PedroHenriqueBS/to-do-list.git
+   cd to-do-list
    ```
 
 2. **Instale as dependências**:  
@@ -53,9 +53,9 @@ Este é um projeto simples de lista de tarefas (to-do list) desenvolvido em **Re
 
 3. **Inicie o projeto**:  
    ```bash
-   npm dev
+   npm start
    # ou
-   yarn dev
+   yarn start
    ```
 
 **Deploy do projeto**:  
