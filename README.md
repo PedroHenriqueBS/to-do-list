@@ -71,5 +71,4 @@ Este é um projeto simples de lista de tarefas (to-do list) desenvolvido em **Re
 ## 👤 Autor  
 
 - **Pedro Henrique**  
-- LinkedIn: [Meu Perfil](https://www.linkedin.com/in/pedro-henrique-23418b213/)  
-- Instagram: [Meu Instagram](https://www.instagram.com/pedroohbs_/)  
+- LinkedIn: [Meu Perfil](https://www.linkedin.com/in/pedro-henrique-23418b213/)
