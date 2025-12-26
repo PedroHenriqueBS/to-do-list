@@ -1,4 +1,4 @@
-# To-Do List  
+# To-Do List
 
 Este é um projeto simples de lista de tarefas (to-do list) desenvolvido em **React**. O objetivo principal foi aplicar conceitos fundamentais do React, como gerenciamento de estado, efeitos colaterais e memoização, além de proporcionar uma experiência de usuário agradável com temas **Dark** e **Light**.
 
